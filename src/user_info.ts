@@ -73,7 +73,9 @@ export class UserInfo {
     userPullRequest: GitHubUserPullRequest,
     userRepository: GitHubUserRepository,
   ) {
-    const repoNodes = userRepository.repositories?.nodes ?? [];
+    const repoNodes = (userRepository.repositories?.nodes ?? []).filter(
+      (node): node is Repository => node != undefined,
+    );
 
     const totalCommits =
       (userActivity.contributionsCollection?.restrictedContributionsCount ?? 0) +
