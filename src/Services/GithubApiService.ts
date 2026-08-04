@@ -71,8 +71,9 @@ export class GithubApiService extends GithubRepository {
         return result;
       }
       return UserInfo.fromCombined(result);
-    } catch {
+    } catch (error) {
       Logger.error(`Error fetching user info for username: ${username}`);
+      Logger.error(error);
       return new ServiceError("Not found", EServiceKindError.NOT_FOUND);
     }
   }
